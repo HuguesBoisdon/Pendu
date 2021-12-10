@@ -1,4 +1,4 @@
-
+import funk
 
 playing = True 
 newGame = True
@@ -8,7 +8,7 @@ tryCount = maxTries
 
 word = ""
 wordTest = ""
-wordDisp = ""
+wordDisp = " "
 
 while playing :
 
@@ -20,24 +20,26 @@ while playing :
 
         if(newGame):
 
-            word = rndWord()
+            word = funk.wordChoice()
             wordTest = word
             wordDisp = word[0] + "_"*(len(word) - 1)
             newGame = False
         
+        print("\n")
+        print(word)
         print(wordDisp)
+        print(word == wordDisp)
         letter = input("Entrez une lettre :").upper()
 
         matchCount = 0
         while(letter in wordTest):
 
             lInd = wordTest.index(letter)
-            wordDisp[lInd] = word[lInd]
-            wordTest[lInd] = " "
+            wordDisp = wordDisp[:lInd] + word[lInd] + wordDisp[lInd +1:]
+            wordTest = wordTest[:lInd] + " " + wordTest[lInd +1:]
             matchCount += 1
 
         if(matchCount == 0) :
-            
             tryCount -=1
             print("nop")
     else:
